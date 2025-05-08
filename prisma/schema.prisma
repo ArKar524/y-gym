@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String            @id @default(uuid())
+  name         String
+  email        String            @unique
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  address      String?
+  imageUrl     String?
+  password     String
+  phone        String?
+  role         UserRole          @default(MEMBER)
+  plans        DailyPlan[]
+  payments     Payment[]
+  activityLogs UserActivityLog[]
+  metrics      UserMetric[]
+}
+
+model UserActivityLog {
+  id        String   @id @default(uuid())
+  userId    String
+  data      Json
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model DailyPlan {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  details   Json
+  date      DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Payment {
+  id             String        @id @default(uuid())
+  userId         String
+  amount         Float
+  method         PaymentMethod
+  transactionRef String        @unique
+  paidAt         DateTime      @default(now())
+  createdAt      DateTime      @default(now())
+  programId      String
+  program        Program       @relation(fields: [programId], references: [id])
+  user           User          @relation(fields: [userId], references: [id])
+}
+
+model Program {
+  id          String    @id @default(uuid())
+  name        String
+  description String
+  duration    Int
+  price       Float
+  imageUrl    String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  active      Boolean   @default(true)
+  payments    Payment[]
+}
+
+enum UserRole {
+  ADMIN
+  MEMBER
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  PAYPAL
+}
+
+model UserMetric {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  key       String
+  value     Float
+  unit      String?
+  notes     String?
+  recordedAt DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([userId, key])
+  @@index([userId, recordedAt])
+}
+
+enum MetricType {
+  WEIGHT
+  HEIGHT
+  BODY_FAT
+  CHEST
+  WAIST
+  HIPS
+  BICEPS
+  THIGHS
+  CUSTOM
+}
