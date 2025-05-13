@@ -18,10 +18,10 @@ const nextConfig = {
   },
   // Enable experimental features that might help with routing
  output: 'standalone', // if needed for serverless
-experimental: {
-  serverActions: {}
-}
+  experimental: {
+    serverActions: {}
+  }
 
 };
 
-module.exports = nextConfig;
+export default nextConfig;
