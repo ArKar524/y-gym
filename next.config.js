@@ -16,11 +16,16 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-  // Enable experimental features that might help with routing
-  output: 'standalone', // if needed for serverless
+  // Explicitly specify the App Router configuration
+  output: 'standalone',
   experimental: {
-    serverActions: true
-  }
+    serverActions: true,
+    appDir: true
+  },
+  // Explicitly set the source directory for the app
+  distDir: '.next',
+  // Ensure Vercel recognizes the app directory properly
+  reactStrictMode: true
 };
 
-export default nextConfig;
+module.exports = nextConfig;
