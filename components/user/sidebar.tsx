@@ -24,11 +24,6 @@ const navItems = [
     icon: Dumbbell,
   },
   {
-    title: "Schedule",
-    href: "/dashboard/schedule",
-    icon: Calendar,
-  },
-  {
     title: "Body Metrics",
     href: "/dashboard/metrics",
     icon: Heart,
@@ -54,7 +49,7 @@ export function UserSidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="flex h-full w-64 flex-col border-r bg-sidebar">
+    <div className="flex h-full w-64 flex-col border-r bg-sidebar bg-white">
       <div className="flex h-14 items-center border-b px-4">
         <Link href="/dashboard" className="flex items-center gap-2 font-semibold text-lg text-sidebar-foreground">
           <span className="font-bold">Y-GYM</span>
