@@ -16,8 +16,6 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-  // Add output configuration for better static optimization
-  output: 'standalone',
   // Enable experimental features that might help with routing
   experimental: {
     serverActions: true,
