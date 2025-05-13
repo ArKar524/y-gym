@@ -1,3 +1,9 @@
-# Ignore TypeScript errors during deployment
-*.ts
-*.tsx
+# Only ignore TypeScript errors, not the actual files
+# We need to keep TypeScript files for the App Router to work
+.git
+node_modules
+.next
+out
+.vercel
+# Ignore src/app since we're using the root app directory
+src/app

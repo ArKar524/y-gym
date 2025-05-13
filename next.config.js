@@ -22,10 +22,10 @@ const nextConfig = {
     serverActions: true,
     appDir: true
   },
-  // Explicitly set the source directory for the app
-  distDir: '.next',
   // Ensure Vercel recognizes the app directory properly
-  reactStrictMode: true
+  reactStrictMode: true,
+  // Specify the app directory explicitly
+  useFileSystemPublicRoutes: true
 };
 
 module.exports = nextConfig;
