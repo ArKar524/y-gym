@@ -5,8 +5,6 @@
   "framework": "nextjs",
   "outputDirectory": ".next",
   "env": {
-    "PRISMA_GENERATE_DATAPROXY": {
-      "value": "true"
-    }
+    "PRISMA_GENERATE_DATAPROXY": "true"
   }
 }
