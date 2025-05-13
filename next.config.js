@@ -17,9 +17,11 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   // Enable experimental features that might help with routing
-  experimental: {
-    serverActions: true,
-  },
+ output: 'standalone', // if needed for serverless
+experimental: {
+  serverActions: {}
+}
+
 };
 
 module.exports = nextConfig;
