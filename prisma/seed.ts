@@ -3,10 +3,32 @@ import { withAccelerate } from '@prisma/extension-accelerate'
 
 const prisma = new PrismaClient().$extends(withAccelerate())
 
+// Program data to create first
+const programData = [
+  {
+    id: "basic-fitness-id",
+    name: 'Basic Fitness',
+    description: 'A beginner-friendly fitness program',
+    duration: 30,
+    price: 49.99,
+    imageUrl: 'https://example.com/basic-fitness.jpg',
+    active: true
+  },
+  {
+    id: "advanced-training-id",
+    name: 'Advanced Training',
+    description: 'High-intensity workout for experienced members',
+    duration: 60,
+    price: 79.99,
+    imageUrl: 'https://example.com/advanced-training.jpg',
+    active: true
+  }
+]
+
 const userData: Prisma.UserCreateInput[] = [
   {
-    name: 'Alice',
-    email: 'alice@y-gym.io',
+    name: 'Admin',
+    email: 'admin@y-gym.io',
     address: '123 Fitness Ave, Gymtown',
     phone: '+1 (555) 123-4567',
     imageUrl: 'https://randomuser.me/api/portraits/women/42.jpg',
@@ -41,13 +63,14 @@ const userData: Prisma.UserCreateInput[] = [
           amount: 50,
           method: 'CARD',
           transactionRef: 'txn_alice_001',
+          programId: "basic-fitness-id"
         },
       ],
     },
   },
   {
-    name: 'Bob',
-    email: 'bob@y-gym.io',
+    name: 'Ar Kar Moe',
+    email: 'arkarmoe@y-gym.io',
     address: '456 Muscle St, Gymtown',
     phone: '+1 (555) 987-6543',
     imageUrl: 'https://randomuser.me/api/portraits/men/37.jpg',
@@ -82,6 +105,7 @@ const userData: Prisma.UserCreateInput[] = [
           amount: 45,
           method: 'PAYPAL',
           transactionRef: 'txn_bob_001',
+          programId: "advanced-training-id"
         },
       ],
     },
@@ -89,6 +113,12 @@ const userData: Prisma.UserCreateInput[] = [
 ]
 
 export async function main() {
+  console.log('Creating programs...')
+  for (const p of programData) {
+    await prisma.program.create({ data: p })
+  }
+  
+  console.log('Creating users...')
   for (const u of userData) {
     await prisma.user.create({ data: u })
   }
