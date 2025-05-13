@@ -17,11 +17,10 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   // Enable experimental features that might help with routing
- output: 'standalone', // if needed for serverless
+  output: 'standalone', // if needed for serverless
   experimental: {
-    serverActions: {}
+    serverActions: true
   }
-
 };
 
 export default nextConfig;
