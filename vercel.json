@@ -1,7 +1,12 @@
 {
   "version": 2,
-  "buildCommand": "npm run build --legacy-peer-deps",
+  "buildCommand": "npx prisma generate && npm run build --legacy-peer-deps",
   "installCommand": "npm install --legacy-peer-deps",
   "framework": "nextjs",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "env": {
+    "PRISMA_GENERATE_DATAPROXY": {
+      "value": "true"
+    }
+  }
 }
